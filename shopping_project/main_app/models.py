@@ -20,6 +20,9 @@ class Store(models.Model):
     def __str__(self):
         return self.name
 
+def testing(self):
+    pass
+
 
 
 class Product(models.Model):
