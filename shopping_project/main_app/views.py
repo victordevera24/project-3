@@ -15,3 +15,8 @@ class StoreCreate(CreateView):
   model = Store
   fields = ['name', 'street', 'city', 'state', 'zip_code']
   # success_url = '/stores/'
+
+
+def store_detail(request, store_id):
+  store = Store.objects.get(id=store_id)
+  return render(request, 'stores/detail.html',{'store' : store})
