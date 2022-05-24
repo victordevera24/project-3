@@ -22,7 +22,7 @@ class Store(models.Model):
 
     def get_absolute_url(self):
         # print(f'here is the print {self}')
-        return reverse('stores_index', kwargs={'store_id': self.id})
+        return reverse('detail', kwargs={'store_id': self.id})
 
 
 
