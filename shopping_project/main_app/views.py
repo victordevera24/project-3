@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from .models import Store
+from .models import Store, Product
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
 #### Define the home view
@@ -20,3 +20,8 @@ class StoreCreate(CreateView):
 def store_detail(request, store_id):
   store = Store.objects.get(id=store_id)
   return render(request, 'stores/detail.html',{'store' : store})
+
+
+class ProductCreate(CreateView):
+  model = Product
+  fields = ['name', 'price', 'sale_price', 'sale_end' ]
