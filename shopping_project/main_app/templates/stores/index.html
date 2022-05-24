@@ -1,6 +1,12 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
 <h1>Stores!</h1>
+<button><a href="{% url 'stores_create' %}">add a store</a></button>
+
+{% for store in stores %}
+    <ul>
+        <li><a href="">{{ store.name }}</a></li>
+    </ul>
+{% endfor %}
 {% endblock %}
