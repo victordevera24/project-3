@@ -19,12 +19,11 @@ class Store(models.Model):
 
     def __str__(self):
         return self.name
-      
-    def test(self):
-        pass
 
 def testing(self):
     pass
+
+
 
 class Product(models.Model):
     name = models.CharField(max_length=100)
@@ -36,6 +35,7 @@ class Product(models.Model):
 
     def __str__(self):
         return f"{self.name} {self.sale_end}"
+
 
 
 class Review(models.Model):
