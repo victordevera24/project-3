@@ -1,1 +1,20 @@
-hella world
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Recently Posted</h1>
+
+
+
+<div class="feedwrapper">
+    {% for product in products %}
+    <div class="postwrapper">
+        <a href=""><img src="{{product.url}}"></a>
+        <a href="">
+            <h4>{{ product.name }}</h4>
+        </a>
+        <p>Discovered at {{product.store}}</p>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock %}
