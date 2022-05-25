@@ -6,11 +6,21 @@
 {% else %}
 <h1>Add Product</h1>
 {% endif %}
-<form action="{% url 'product_create' store %}" method="POST">
+<form action="{% url 'product_create' store %}" enctype="multipart/form-data" method="POST" class="card-panel">
     {% csrf_token %}
     <table>
         {{ form.as_table }}
+        <label>Photo: </label><input type="file" name="photo-file">
     </table>
     <input type="submit" value="Submit product" class="btn">
 </form>
+<script>
+    const dateEl = document.getElementById('id_sale_end');
+    M.Datepicker.init(dateEl, {
+      format: 'yyyy-mm-dd',
+      defaultDate: new Date(),
+      setDefaultDate: true,
+      autoClose: true
+    });
+</script>
 {% endblock %}

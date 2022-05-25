@@ -125,3 +125,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 AUTH_USER_MODEL = 'main_app.User'
+
+import environ
+environ.Env()
+environ.Env.read_env()
