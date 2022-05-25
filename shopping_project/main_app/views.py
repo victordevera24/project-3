@@ -24,7 +24,8 @@ class StoreCreate(CreateView):
 
 def store_detail(request, store_id):
   store = Store.objects.get(id=store_id)
-  return render(request, 'stores/detail.html',{'store' : store})
+  products = Product.objects.filter(store=store_id)
+  return render(request, 'stores/detail.html',{'store' : store, 'products':products})
 
 
 def new_product(request, store_id):
@@ -48,5 +49,5 @@ def product_create(request, store_id):
     except:
       print('An error occurrd uploading file to S3')
     form.save()
-  return redirect('stores_index')
+  return redirect('detail', store_id=store_id)
 
