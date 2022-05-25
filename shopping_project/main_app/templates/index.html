@@ -12,7 +12,7 @@
         <a href="product/{{product.id}}/">
             <h4>{{ product.name }}</h4>
         </a>
-        <p>Discovered at {{product.store}}</p>
+        <p>Discovered at <a href="stores/{{product.store_id}}">{{product.store}}</a></p>
     </div>
     {% endfor %}
 </div>
