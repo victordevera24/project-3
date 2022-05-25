@@ -37,8 +37,6 @@ class Product(models.Model):
     def __str__(self):
         return f"{self.name} {self.sale_end}"
 
-
-
 class Review(models.Model):
     title = models.CharField(max_length=100)
     content = models.TextField(max_length=100)
