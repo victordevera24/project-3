@@ -11,7 +11,8 @@ import boto3
 
 #### Define the home view
 def home(request):
-  return render(request, 'index.html')
+  products = Product.objects.all().order_by('-created')
+  return render(request, 'index.html', {'products' : products})
 
 def stores_index(request):
   stores = Store.objects.all()

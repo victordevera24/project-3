@@ -34,6 +34,7 @@ class Product(models.Model):
     store = models.ForeignKey(Store, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.DO_NOTHING, blank = True, null = True)
     url = models.CharField(max_length=200)
+    created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return f"{self.name} {self.sale_end}"
