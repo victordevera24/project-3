@@ -37,6 +37,11 @@ class Product(models.Model):
 
     def __str__(self):
         return f"{self.name} {self.sale_end}"
+
+    def get_absolute_url(self):
+        # print(f'here is the print {self}')
+        return reverse('product_detail', kwargs={'product_id': self.id})
+
         
 
 

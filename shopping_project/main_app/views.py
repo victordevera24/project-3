@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from .models import Store, Product
 from .forms import ProductForm
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.urls import reverse, reverse_lazy
 import os
 import uuid
 import boto3
@@ -51,3 +52,17 @@ def product_create(request, store_id):
     form.save()
   return redirect('detail', store_id=store_id)
 
+class ProductUpdate(UpdateView):
+  model = Product
+  fields = ['name', 'price', 'sale_price', 'sale_end']
+
+  # def get_success_url(self):
+  #   return reverse_lazy('product_detail', kwargs = {'product_id' : self.object.id})
+
+class ProductDelete(DeleteView):
+  model = Product
+  success_url = '/home/'
+
+def product_detail(request, product_id):
+  product = Product.objects.get(id=product_id)
+  return render(request, 'products/detail.html', {'product':product})
