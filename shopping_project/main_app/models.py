@@ -15,7 +15,7 @@ class Store(models.Model):
     city = models.CharField(max_length=100)
     state = models.CharField(max_length=100)
     zip_code = models.IntegerField()
-    user = models.ForeignKey(User, on_delete=models.DO_NOTHING , blank = True, null = True)
+    user = models.ForeignKey(User, on_delete=models.DO_NOTHING, blank = True, null = True)
 
     def __str__(self):
         return self.name
@@ -32,12 +32,10 @@ class Product(models.Model):
     sale_price = models.IntegerField()
     sale_end = models.DateField()
     store = models.ForeignKey(Store, on_delete=models.CASCADE)
-    user = models.ForeignKey(User, on_delete=models.DO_NOTHING)
+    user = models.ForeignKey(User, on_delete=models.DO_NOTHING, blank = True, null = True)
 
     def __str__(self):
         return f"{self.name} {self.sale_end}"
-
-
 
 class Review(models.Model):
     title = models.CharField(max_length=100)
