@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .models import Store
+from .models import Store, Product
 from .forms import ProductForm
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
@@ -20,7 +20,8 @@ class StoreCreate(CreateView):
 
 def store_detail(request, store_id):
   store = Store.objects.get(id=store_id)
-  return render(request, 'stores/detail.html',{'store' : store})
+  products = Product.objects.filter(store=store_id)
+  return render(request, 'stores/detail.html',{'store' : store, 'products':products})
 
 
 def new_product(request, store_id):
@@ -33,4 +34,4 @@ def product_create(request, store_id):
     new_product = form.save(commit=False)
     new_product.store_id = store_id
     form.save()
-  return redirect('stores_index')
+  return redirect('detail', store_id=store_id)
