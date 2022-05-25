@@ -36,5 +36,14 @@
         <div class="right">All Rights Reserved, &copy; 2022 !!PUT PROJECT NAME HERE!! &nbsp;</div>
     </footer>
 </body>
+<script>
+    const dateEl = document.getElementById('id_sale_end');
+    M.Datepicker.init(dateEl, {
+      format: 'yyyy-mm-dd',
+      defaultDate: new Date(),
+      setDefaultDate: true,
+      autoClose: true
+    });
+</script>
 
 </html>
