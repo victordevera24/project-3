@@ -100,7 +100,8 @@ class ProductDelete(LoginRequiredMixin, DeleteView):
 @login_required
 def product_detail(request, product_id):
   product = Product.objects.get(id=product_id)
-  return render(request, 'products/detail.html', {'product':product})
+  wishlist = WishList.objects.filter(users=request.user)
+  return render(request, 'products/detail.html', {'product':product, 'wishlist':wishlist})
 
 def new_wishlist(request, product_id):
   form = WishListForm()
@@ -109,7 +110,8 @@ def new_wishlist(request, product_id):
 def wishlist_create(request, product_id):
   form = WishListForm(request.POST)
   if form.is_valid():
+    print('inside the if!!')
     new_wishlist = form.save(commit=False)
-    new_wishlist.user_id = request.user.id
+    new_wishlist.users_id = request.user.id
     form.save()
   return redirect('product_detail', product_id=product_id)

@@ -3,7 +3,7 @@
 {% block content %}
 
 <h1>Create Wishlist</h1>
-<form action="{% url 'product_detail' product_id %}" method="POST">
+<form action="{% url 'wishlist_create' product_id %}" method="POST">
     {% csrf_token %}
     <table>
         {{ form.as_table }}
