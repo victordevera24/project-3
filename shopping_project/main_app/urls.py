@@ -14,6 +14,8 @@ urlpatterns = [
      path('accounts/signup/', views.signup, name='signup'),
      path('products/<int:pk>/update/', views.ProductUpdate.as_view(), name='products_update'),
      path('products/<int:pk>/delete/', views.ProductDelete.as_view(), name='products_delete'),
-     path('product/<int:product_id>/', views.product_detail, name='product_detail')
+     path('product/<int:product_id>/', views.product_detail, name='product_detail'),
+     path('product/<int:product_id>/new_wishlist', views.new_wishlist, name='new_wishlist'),
+     path('products/<int:product_id>/wishlist_create/', views.wishlist_create, name='wishlist_create'),
 ]
 

@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .models import Store, Product
-from .forms import ProductForm
+from .models import Store, Product, WishList
+from .forms import ProductForm, WishListForm
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse, reverse_lazy
 import os
@@ -68,7 +68,7 @@ def product_create(request, store_id):
       url = f"{os.environ['S3_BASE_URL']}{bucket}/{key}"
       new_product.url = url
     except:
-      print('An error occurrd uploading file to S3')
+      print('An error occurred uploading file to S3')
     form.save()
   return redirect('detail', store_id=store_id)
 
@@ -102,3 +102,14 @@ def product_detail(request, product_id):
   product = Product.objects.get(id=product_id)
   return render(request, 'products/detail.html', {'product':product})
 
+def new_wishlist(request, product_id):
+  form = WishListForm()
+  return render(request, 'wishlists/create.html', {'form' : form, 'product_id' : product_id})
+
+def wishlist_create(request, product_id):
+  form = WishListForm(request.POST)
+  if form.is_valid():
+    new_wishlist = form.save(commit=False)
+    new_wishlist.user_id = request.user.id
+    form.save()
+  return redirect('product_detail', product_id=product_id)

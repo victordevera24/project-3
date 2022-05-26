@@ -3,8 +3,12 @@
 
 <h1>{{product.name}}</h1>
 <div class="card-action">
-    <a href="{% url 'products_update' product.id %}">Edit</a>
-    <a href="{% url 'products_delete' product.id  %}">Delete</a>
-  </div>
+  <a href="{% url 'products_update' product.id %}">Edit</a>
+  <a href="{% url 'products_delete' product.id  %}">Delete</a>
+  <form action="{% url 'new_wishlist' product.id %}">
+    <button type="submit">Make a new wishlist</button>
+  </form>
+
+</div>
 
 {% endblock %}
