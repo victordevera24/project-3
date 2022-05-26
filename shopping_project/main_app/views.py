@@ -9,17 +9,21 @@ import uuid
 import boto3
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
+
 
 #### Define the home view
 def home(request):
   products = Product.objects.all().order_by('-created')
   return render(request, 'index.html', {'products' : products})
 
+@login_required
 def stores_index(request):
-  stores = Store.objects.all()
+  stores = Store.objects.filter(user=request.user)
   return render(request, 'stores/index.html', {'stores' : stores})
 
-class StoreCreate(CreateView):
+class StoreCreate(LoginRequiredMixin, CreateView):
   model = Store
   fields = ['name', 'street', 'city', 'state', 'zip_code']
   # success_url = '/stores/'
@@ -28,15 +32,18 @@ class StoreCreate(CreateView):
     form.instance.user = self.request.user  
     return super().form_valid(form)
 
+@login_required
 def store_detail(request, store_id):
   store = Store.objects.get(id=store_id)
   products = Product.objects.filter(store=store_id)
   return render(request, 'stores/detail.html',{'store' : store, 'products':products})
 
+@login_required
 def new_product(request, store_id):
   form = ProductForm()
   return render(request, 'products/create.html', {'form' : form, 'store' : store_id})
 
+@login_required
 def product_create(request, store_id):
   form = ProductForm(request.POST)
   if form.is_valid():
@@ -74,14 +81,15 @@ def signup(request):
   context = {'form': form, 'error_message': error_message}
   return render(request, 'registration/signup.html', context)
 
-class ProductUpdate(UpdateView):
+class ProductUpdate(LoginRequiredMixin, UpdateView):
   model = Product
   fields = ['name', 'price', 'sale_price', 'sale_end']
 
-class ProductDelete(DeleteView):
+class ProductDelete(LoginRequiredMixin, DeleteView):
   model = Product
   success_url = '/stores/'
 
+@login_required
 def product_detail(request, product_id):
   product = Product.objects.get(id=product_id)
   return render(request, 'products/detail.html', {'product':product})
