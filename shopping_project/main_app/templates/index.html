@@ -8,7 +8,7 @@
 <div class="feedwrapper">
     {% for product in products %}
     <div class="postwrapper">
-        <a href="product/{{product.id}}/"><img src="{{product.url}}"></a>
+        <a href="product/{{product.id}}/"><img class="postpic" src="{{product.url}}"></a>
         <a href="product/{{product.id}}/">
             <h4>{{ product.name }}</h4>
         </a>
