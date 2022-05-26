@@ -6,7 +6,16 @@
   <a href="{% url 'products_update' product.id %}">Edit</a>
   <a href="{% url 'products_delete' product.id  %}">Delete</a>
   {% if wishlist.count %}
-  <a>Add to Wishlist</a>
+  <form action="">
+    <label>Select a Wishlist</label>
+    <select class="browser-default" name="name">
+      {% for list in wishlist %}
+      <option value="{{list.name}}">{{list.name}}</option>
+      {% endfor %}
+    </select>
+    <input type="hidden" value="{{product.name}}">
+    <input type="submit" value="Add to Wishlist">
+  </form>
   {% endif %}
   <form action="{% url 'new_wishlist' product.id %}">
     <button type="submit">Make a new wishlist</button>
