@@ -2,11 +2,19 @@
 {% block content %}
 
 <h1>{{product.name}}</h1>
-<div class="card-action">
-    {% if request.user == product.user %}
-      <a href="{% url 'products_update' product.id %}">Edit</a>
-      <a href="{% url 'products_delete' product.id  %}">Delete</a>
-    {% endif %}
+{% if request.user == product.user %}
+  <div class="card-action">
+    <a href="{% url 'products_update' product.id %}">Edit</a>
+    <a href="{% url 'products_delete' product.id  %}">Delete</a>
   </div>
+{% endif %}
+<button><a href="{% url 'new_review' product.id %}">Add review</a></button>
+{% for review in reviews %}
+  <ul>
+      <li>{{ review.title }}</li>
+      <a href="{% url 'review_update' review.id %}">Edit</a>
+      <a href="{% url 'review_delete' review.id  %}">Delete</a>
+  </ul>
+{% endfor %}
 
 {% endblock %}
