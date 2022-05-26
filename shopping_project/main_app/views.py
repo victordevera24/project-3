@@ -80,7 +80,7 @@ class ProductUpdate(UpdateView):
 
 class ProductDelete(DeleteView):
   model = Product
-  success_url = '/home/'
+  success_url = '/stores/'
 
 def product_detail(request, product_id):
   product = Product.objects.get(id=product_id)
