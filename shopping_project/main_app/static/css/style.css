@@ -1,3 +1,31 @@
 footer {
+    margin-top: 10px;
     padding-top: 0px;
+}
+
+h1 {
+    background-color: purple;
+}
+
+.navbar-fixed {
+    background-color: purple;
+}
+
+.feedwrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 10px;
+}
+
+.postwrapper {
+    width: 20vw;
+    height: 23vh;
+}
+
+.postpic {
+    object-fit: contain;
+    width: 20vw;
+    height: 10vh;
 }

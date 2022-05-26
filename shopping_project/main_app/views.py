@@ -3,19 +3,17 @@ from django.http import HttpResponse
 from .models import Store, Product
 from .forms import ProductForm
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.urls import reverse, reverse_lazy
 import os
 import uuid
 import boto3
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 
-
-
-
-
 #### Define the home view
 def home(request):
-  return render(request, 'index.html')
+  products = Product.objects.all().order_by('-created')
+  return render(request, 'index.html', {'products' : products})
 
 def stores_index(request):
   stores = Store.objects.all()
@@ -27,17 +25,13 @@ class StoreCreate(CreateView):
   # success_url = '/stores/'
 
   def form_valid(self, form):
-    
     form.instance.user = self.request.user  
-  
     return super().form_valid(form)
-
 
 def store_detail(request, store_id):
   store = Store.objects.get(id=store_id)
   products = Product.objects.filter(store=store_id)
   return render(request, 'stores/detail.html',{'store' : store, 'products':products})
-
 
 def new_product(request, store_id):
   form = ProductForm()
@@ -79,3 +73,16 @@ def signup(request):
   form = UserCreationForm()
   context = {'form': form, 'error_message': error_message}
   return render(request, 'registration/signup.html', context)
+
+class ProductUpdate(UpdateView):
+  model = Product
+  fields = ['name', 'price', 'sale_price', 'sale_end']
+
+class ProductDelete(DeleteView):
+  model = Product
+  success_url = '/home/'
+
+def product_detail(request, product_id):
+  product = Product.objects.get(id=product_id)
+  return render(request, 'products/detail.html', {'product':product})
+

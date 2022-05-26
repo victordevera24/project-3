@@ -5,8 +5,8 @@
 <button><a href="{% url 'stores_create' %}">add a store</a></button>
 
 {% for store in stores %}
-    <ul>
-        <li><a href="">{{ store.name }}</a></li>
-    </ul>
+<ul>
+    <li><a href="/stores/{{store.id}}/">{{ store.name }}</a></li>
+</ul>
 {% endfor %}
 {% endblock %}

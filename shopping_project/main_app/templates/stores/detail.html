@@ -8,9 +8,9 @@
 <button><a href="{% url 'new_product' store.id %}">ADD PRODUCT</a></button>
 
 {% for product in products %}
-    <ul>
-        <li><a href="">{{ product.name }}</a></li>
-    </ul>
+<ul>
+    <li><a href="/product/{{product.id}}/">{{ product.name }}</a></li>
+</ul>
 {% endfor %}
 
 {% endblock %}
