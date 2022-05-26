@@ -44,6 +44,11 @@ class Product(models.Model):
         # print(f'here is the print {self}')
         return reverse('product_detail', kwargs={'product_id': self.id})
 
+
+class WishList(models.Model):
+    name = models.CharField(max_length=100)
+    users = models.ForeignKey(User, on_delete=models.CASCADE)
+    products = models.ManyToManyField(Product, blank=True)
         
 
 
