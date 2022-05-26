@@ -2,7 +2,10 @@
 {% block content %}
 
 <h1>{{store.name}}</h1>
-
+<div class="card-action">
+    <a href="{% url 'stores_update' store.id %}">Edit</a>
+    <a href="{% url 'stores_delete' store.id  %}">Delete</a>
+</div>
 
 
 <button><a href="{% url 'new_product' store.id %}">ADD PRODUCT</a></button>

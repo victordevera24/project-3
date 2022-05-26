@@ -32,6 +32,14 @@ class StoreCreate(LoginRequiredMixin, CreateView):
     form.instance.user = self.request.user  
     return super().form_valid(form)
 
+class StoreUpdate(LoginRequiredMixin, UpdateView):
+  model = Store
+  fields = ['name', 'street', 'city', 'state', 'zip_code']
+
+class StoreDelete(LoginRequiredMixin, DeleteView):
+  model = Store
+  success_url = '/stores/'
+
 @login_required
 def store_detail(request, store_id):
   store = Store.objects.get(id=store_id)
