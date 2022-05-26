@@ -127,4 +127,5 @@ class ReviewUpdate(LoginRequiredMixin, UpdateView):
 
 class ReviewDelete(LoginRequiredMixin, DeleteView):
   model = Review
-  success_url = '/stores/'
+  def get_success_url(self, **kwargs):
+        return reverse('product_detail', args=(self.object.product.id,))
