@@ -6,6 +6,11 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 import os
 import uuid
 import boto3
+from django.contrib.auth import login
+from django.contrib.auth.forms import UserCreationForm
+
+
+
 
 
 #### Define the home view
@@ -20,6 +25,12 @@ class StoreCreate(CreateView):
   model = Store
   fields = ['name', 'street', 'city', 'state', 'zip_code']
   # success_url = '/stores/'
+
+  def form_valid(self, form):
+    
+    form.instance.user = self.request.user  
+  
+    return super().form_valid(form)
 
 
 def store_detail(request, store_id):
@@ -37,6 +48,7 @@ def product_create(request, store_id):
   if form.is_valid():
     new_product = form.save(commit=False)
     new_product.store_id = store_id
+    new_product.user_id = request.user.id
     photo_file = request.FILES.get('photo-file', None)
     if photo_file:
       s3 = boto3.client('s3')
@@ -51,3 +63,19 @@ def product_create(request, store_id):
     form.save()
   return redirect('detail', store_id=store_id)
 
+def signup(request):
+  error_message = ''
+  if request.method == 'POST':
+  
+    form = UserCreationForm(request.POST)
+    if form.is_valid():
+      
+      user = form.save()
+      login(request, user)
+      return redirect('stores_index')
+    else:
+      error_message = 'Invalid sign up - try again'
+
+  form = UserCreationForm()
+  context = {'form': form, 'error_message': error_message}
+  return render(request, 'registration/signup.html', context)
