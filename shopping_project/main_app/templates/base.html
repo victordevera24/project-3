@@ -18,10 +18,15 @@
             <div class="nav-wrapper project3nav">
                 <ul>
                     <li><a href="{% url 'home' %}">Home</a></li>
-                    <li><a href="{% url 'stores_create' %}">Add Store</a></li>
-                    <li><a href="{% url 'stores_index' %}">Store List</a></li>
-                    <li><a href="">Wish List</a></li>
-                    <li><a href="">Log Out</a></li>
+                    {% if user.is_authenticated %}
+                        <li><a href="{% url 'stores_create' %}">Add Store</a></li>
+                        <li><a href="{% url 'stores_index' %}">Store List</a></li>
+                        <li><a href="">Wish List</a></li>
+                        <li><a href="{% url 'logout' %}">Log Out</a></li>
+                    {% else %}
+                    <li><a href="{% url 'signup' %}">Sign Up</a></li>
+                    <li><a href="{% url 'login' %}">Log In</a></li>
+                    {% endif %}
                 </ul>
             </div>
         </nav>
