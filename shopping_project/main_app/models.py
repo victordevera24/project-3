@@ -41,7 +41,6 @@ class Product(models.Model):
         return f"{self.name} {self.sale_end}"
 
     def get_absolute_url(self):
-        # print(f'here is the print {self}')
         return reverse('product_detail', kwargs={'product_id': self.id})
 
 
@@ -54,12 +53,15 @@ class WishList(models.Model):
 
 class Review(models.Model):
     title = models.CharField(max_length=100)
-    content = models.TextField(max_length=100)
+    review = models.TextField(max_length=100)
     rating = models.IntegerField()
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.title
+
+    def get_absolute_url(self):
+        return reverse('product_detail', kwargs={'product_id': self.product.id})
 
 

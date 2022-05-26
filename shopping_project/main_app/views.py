@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .models import Store, Product
+from .models import Store, Product, Review
 from .forms import ProductForm
+from .forms import ReviewForm
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse, reverse_lazy
 import os
@@ -92,5 +93,30 @@ class ProductDelete(LoginRequiredMixin, DeleteView):
 @login_required
 def product_detail(request, product_id):
   product = Product.objects.get(id=product_id)
-  return render(request, 'products/detail.html', {'product':product})
+  reviews = Review.objects.filter(product=product_id)
+  return render(request, 'products/detail.html', {'product':product, 'reviews':reviews})
 
+@login_required
+def new_review(request, product_id):
+  form = ReviewForm()
+  return render(request, 'reviews/create.html', {'form' : form, 'product' : product_id})
+
+
+@login_required
+def review_create(request, product_id):
+  product = Product.objects.get(id=product_id)
+  form = ReviewForm(request.POST)
+  if form.is_valid():
+    new_review = form.save(commit=False)
+    new_review.product = product
+    new_review.user = request.user
+    new_review.save()
+  return redirect('product_detail', product_id = product_id)
+
+class ReviewUpdate(LoginRequiredMixin, UpdateView):
+  model = Review
+  fields = ['title', 'review', 'rating']
+
+class ReviewDelete(LoginRequiredMixin, DeleteView):
+  model = Review
+  success_url = '/stores/'
