@@ -20,7 +20,7 @@ def home(request):
 
 @login_required
 def stores_index(request):
-  stores = Store.objects.filter(user=request.user)
+  stores = Store.objects.all()
   return render(request, 'stores/index.html', {'stores' : stores})
 
 class StoreCreate(LoginRequiredMixin, CreateView):
