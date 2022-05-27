@@ -150,3 +150,13 @@ class ReviewDelete(LoginRequiredMixin, DeleteView):
   def get_success_url(self, **kwargs):
         return reverse('product_detail', args=(self.object.product.id,))
 
+@login_required
+def wishlists_index(request):
+  wishlists = WishList.objects.filter(users=request.user)
+  return render(request, 'wishlists/index.html', {'wishlists' : wishlists, 'user': request.user})
+
+@login_required
+def wishlists_detail(request, wishlist_id):
+  wishlist = WishList.objects.get(id=wishlist_id)
+  products = wishlist.products.all()
+  return render(request, 'wishlists/detail.html', {'wishlist' : wishlist, 'products' : products})
