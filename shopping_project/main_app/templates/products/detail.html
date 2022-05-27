@@ -5,15 +5,15 @@
 <div class="card-action">
   <a href="{% url 'products_update' product.id %}">Edit</a>
   <a href="{% url 'products_delete' product.id  %}">Delete</a>
-  {% if wishlist.count %}
-  <form action="">
+  {% if wishlists.count %}
+  <form action="{% url 'assoc_product' product.id %}" method="post">
+    {% csrf_token %}
     <label>Select a Wishlist</label>
-    <select class="browser-default" name="name">
-      {% for list in wishlist %}
-      <option value="{{list.name}}">{{list.name}}</option>
+    <select class="browser-default" name="id">
+      {% for wishlist in wishlists %}
+      <option value="{{wishlist.id}}">{{wishlist.name}}</option>
       {% endfor %}
     </select>
-    <input type="hidden" value="{{product.name}}">
     <input type="submit" value="Add to Wishlist">
   </form>
   {% endif %}
