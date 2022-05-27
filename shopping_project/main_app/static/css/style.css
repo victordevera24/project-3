@@ -1,48 +1,49 @@
 footer {
-    margin-top: 10px;
-    padding-top: 0px;
+  margin-top: 10px;
+  padding-top: 0px;
 }
 
 .feedwrapper {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    gap: 20px;
-    margin-bottom: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 10px;
 }
 
 .postwrapper {
-    width: 20vw;
-    height: 23vh;
+  width: 20vw;
+  height: 23vh;
 }
 
 .postpic {
-    object-fit: contain;
-    width: 20vw;
-    height: 10vh;
+  object-fit: contain;
+  width: 20vw;
+  height: 10vh;
 }
+
 body {
-    display: flex;
-    min-height: 100vh;
-    flex-direction: column;
-    background-image: linear-gradient(to right top, #dccf88, #f0b175, #fd917b, #f97496, #d867bc, #bd64cb, #9765d9, #5e68e4, #5861e2, #5159e0, #4b52dd, #454adb);
-    color: white;
-  }
-  
-  main {
-    flex: 1 0 auto;
-  }
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  background-image: linear-gradient(to right top, #dccf88, #f0b175, #fd917b, #f97496, #d867bc, #bd64cb, #9765d9, #5e68e4, #5861e2, #5159e0, #4b52dd, #454adb);
+  color: white;
+}
 
-  
-  footer.page-footer {
-    padding-top: 0;
-    text-align: right;
-  }
+main {
+  flex: 1 0 auto;
+}
 
-  nav{
-      background-color: #87329f;
-  }
 
-.page-footer{
-    background-color: #87329f;
-  }
+footer.page-footer {
+  padding-top: 0;
+  text-align: right;
+}
+
+nav {
+  background-color: #87329f;
+}
+
+.page-footer {
+  background-color: #87329f;
+}

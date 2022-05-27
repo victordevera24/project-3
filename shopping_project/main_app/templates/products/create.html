@@ -10,17 +10,17 @@
     {% csrf_token %}
     <table>
         {{ form.as_table }}
-        <label>Photo: </label><input type="file" name="photo-file">
+        <label>Photo: </label><input style="color:black" type="file" name="photo-file" required>
     </table>
     <input type="submit" value="Submit product" class="btn">
 </form>
 <script>
     const dateEl = document.getElementById('id_sale_end');
     M.Datepicker.init(dateEl, {
-      format: 'yyyy-mm-dd',
-      defaultDate: new Date(),
-      setDefaultDate: true,
-      autoClose: true
+        format: 'yyyy-mm-dd',
+        defaultDate: new Date(),
+        setDefaultDate: true,
+        autoClose: true
     });
 </script>
 {% endblock %}
