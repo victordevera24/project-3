@@ -139,7 +139,9 @@ def review_create(request, product_id):
     new_review.product = product
     new_review.user = request.user
     new_review.save()
-  return redirect('product_detail', product_id = product_id)
+    return redirect('product_detail', product_id = product_id)
+  else:# redirect back to the user page with errors
+    return render(request, 'reviews/create.html', {'form':form, 'product': product_id})
 
 class ReviewUpdate(LoginRequiredMixin, UpdateView):
   model = Review
