@@ -100,9 +100,9 @@ class ProductDelete(LoginRequiredMixin, DeleteView):
 @login_required
 def product_detail(request, product_id):
   product = Product.objects.get(id=product_id)
-
+  reviews = Review.objects.filter(product=product_id)
   wishlist = WishList.objects.filter(users=request.user).exclude(products__id = product_id)
-  return render(request, 'products/detail.html', {'product':product, 'wishlists':wishlist})
+  return render(request, 'products/detail.html', {'product':product, 'reviews':reviews, 'wishlists':wishlist})
 
 @login_required
 def new_wishlist(request, product_id):
@@ -123,8 +123,6 @@ def assoc_product(request, product_id):
   WishList.objects.get(id=request.POST['id']).products.add(product_id) 
   return redirect('product_detail', product_id=product_id)
 
-  reviews = Review.objects.filter(product=product_id)
-  return render(request, 'products/detail.html', {'product':product, 'reviews':reviews})
 
 @login_required
 def new_review(request, product_id):
