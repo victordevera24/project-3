@@ -4,8 +4,16 @@
 <h1>{{product.name}}</h1>
 <div class="card-action">
   {% if request.user == product.user %}
-    <a href="{% url 'products_update' product.id %}">Edit</a>
-    <a href="{% url 'products_delete' product.id  %}">Delete</a>
+  <a href="{% url 'products_update' product.id %}">Edit</a>
+  <a href="{% url 'products_delete' product.id  %}">Delete</a>
+  {% endif %}
+  {% if usedwl.count %}
+  <p>Already on your
+    {% for wl in usedwl %}
+    <span style=color:rgb(132,0,255);font-weight:bold>"{{wl.name}}"</span>
+    {% endfor %}
+    wishlist(s).
+  </p>
   {% endif %}
   {% if wishlists.count %}
   <form action="{% url 'assoc_product' product.id %}" method="post">
@@ -13,7 +21,7 @@
     <label>Select a Wishlist</label>
     <select class="browser-default" name="id">
       {% for wishlist in wishlists %}
-        <option value="{{wishlist.id}}">{{wishlist.name}}</option>
+      <option value="{{wishlist.id}}">{{wishlist.name}}</option>
       {% endfor %}
     </select>
     <input type="submit" value="Add to Wishlist">
@@ -25,13 +33,13 @@
 </div>
 <button><a href="{% url 'new_review' product.id %}">Add review</a></button>
 {% for review in reviews %}
-  <ul>
-      <li>{{ review.title }}</li>
-      {% if request.user == review.user %}
-        <a href="{% url 'review_update' review.id %}">Edit</a>
-        <a href="{% url 'review_delete' review.id  %}">Delete</a>
-      {% endif %}
-  </ul>
+<ul>
+  <li>{{ review.title }}</li>
+  {% if request.user == review.user %}
+  <a href="{% url 'review_update' review.id %}">Edit</a>
+  <a href="{% url 'review_delete' review.id  %}">Delete</a>
+  {% endif %}
+</ul>
 {% endfor %}
 
 
