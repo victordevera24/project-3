@@ -1,10 +1,9 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .models import Store, Product, Review
-from .forms import ProductForm
-from .forms import ReviewForm
+from .models import Store, Product, Review, WishList
+from .forms import ProductForm, WishListForm, ReviewForm
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from django.urls import reverse, reverse_lazy
+from django.urls import reverse
 import os
 import uuid
 import boto3
@@ -69,7 +68,7 @@ def product_create(request, store_id):
       url = f"{os.environ['S3_BASE_URL']}{bucket}/{key}"
       new_product.url = url
     except:
-      print('An error occurrd uploading file to S3')
+      print('An error occurred uploading file to S3')
     form.save()
   return redirect('detail', store_id=store_id)
 
@@ -101,6 +100,29 @@ class ProductDelete(LoginRequiredMixin, DeleteView):
 @login_required
 def product_detail(request, product_id):
   product = Product.objects.get(id=product_id)
+
+  wishlist = WishList.objects.filter(users=request.user).exclude(products__id = product_id)
+  return render(request, 'products/detail.html', {'product':product, 'wishlists':wishlist})
+
+@login_required
+def new_wishlist(request, product_id):
+  form = WishListForm()
+  return render(request, 'wishlists/create.html', {'form' : form, 'product_id' : product_id})
+
+@login_required
+def wishlist_create(request, product_id):
+  form = WishListForm(request.POST)
+  if form.is_valid():
+    new_wishlist = form.save(commit=False)
+    new_wishlist.users_id = request.user.id
+    form.save()
+  return redirect('product_detail', product_id=product_id)
+
+@login_required
+def assoc_product(request, product_id):
+  WishList.objects.get(id=request.POST['id']).products.add(product_id) 
+  return redirect('product_detail', product_id=product_id)
+
   reviews = Review.objects.filter(product=product_id)
   return render(request, 'products/detail.html', {'product':product, 'reviews':reviews})
 
@@ -129,3 +151,4 @@ class ReviewDelete(LoginRequiredMixin, DeleteView):
   model = Review
   def get_success_url(self, **kwargs):
         return reverse('product_detail', args=(self.object.product.id,))
+

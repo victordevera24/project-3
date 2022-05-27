@@ -2,12 +2,27 @@
 {% block content %}
 
 <h1>{{product.name}}</h1>
-{% if request.user == product.user %}
-  <div class="card-action">
+<div class="card-action">
+  {% if request.user == product.user %}
     <a href="{% url 'products_update' product.id %}">Edit</a>
     <a href="{% url 'products_delete' product.id  %}">Delete</a>
-  </div>
-{% endif %}
+  {% endif %}
+  {% if wishlists.count %}
+  <form action="{% url 'assoc_product' product.id %}" method="post">
+    {% csrf_token %}
+    <label>Select a Wishlist</label>
+    <select class="browser-default" name="id">
+      {% for wishlist in wishlists %}
+      <option value="{{wishlist.id}}">{{wishlist.name}}</option>
+      {% endfor %}
+    </select>
+    <input type="submit" value="Add to Wishlist">
+  </form>
+  {% endif %}
+  <form action="{% url 'new_wishlist' product.id %}">
+    <button type="submit">Make a new wishlist</button>
+  </form>
+</div>
 <button><a href="{% url 'new_review' product.id %}">Add review</a></button>
 {% for review in reviews %}
   <ul>
@@ -18,5 +33,6 @@
       {% endif %}
   </ul>
 {% endfor %}
+
 
 {% endblock %}
