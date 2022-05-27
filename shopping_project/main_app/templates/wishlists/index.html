@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>{{user}}'s Wishlists</h1>
+
+{% for wishlist in wishlists %}
+<ul>
+    <li><a href="/wishlists/{{wishlist.id}}/">{{ wishlist.name }}</a></li>
+</ul>
+{% endfor %}
+{% endblock %}
