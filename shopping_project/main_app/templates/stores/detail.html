@@ -10,12 +10,18 @@
 </div>
 
 
-<button><a href="{% url 'new_product' store.id %}">ADD PRODUCT</a></button>
+<button class="button"><a href="{% url 'new_product' store.id %}">ADD PRODUCT</a></button>
 
-{% for product in products %}
-<ul>
-    <li><a href="/product/{{product.id}}/">{{ product.name }}</a></li>
-</ul>
-{% endfor %}
+<div class="feedwrapper">
+    {% for product in products %}
+    <div class="postwrapper">
+        <a href="/product/{{product.id}}/"><img class="postpic" src="{{product.url}}"></a>
+        <a href="/product/{{product.id}}/">
+            <h4>{{ product.name }}</h4>
+        </a>
+    </div>   
+    {% endfor %}
+</div>
+
 
 {% endblock %}
