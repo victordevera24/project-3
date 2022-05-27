@@ -3,8 +3,10 @@
 
 <h1>{{product.name}}</h1>
 <div class="card-action">
-  <a href="{% url 'products_update' product.id %}">Edit</a>
-  <a href="{% url 'products_delete' product.id  %}">Delete</a>
+  {% if request.user == product.user %}
+    <a href="{% url 'products_update' product.id %}">Edit</a>
+    <a href="{% url 'products_delete' product.id  %}">Delete</a>
+  {% endif %}
   {% if wishlists.count %}
   <form action="{% url 'assoc_product' product.id %}" method="post">
     {% csrf_token %}
@@ -21,5 +23,16 @@
     <button type="submit">Make a new wishlist</button>
   </form>
 </div>
+<button><a href="{% url 'new_review' product.id %}">Add review</a></button>
+{% for review in reviews %}
+  <ul>
+      <li>{{ review.title }}</li>
+      {% if request.user == review.user %}
+        <a href="{% url 'review_update' review.id %}">Edit</a>
+        <a href="{% url 'review_delete' review.id  %}">Delete</a>
+      {% endif %}
+  </ul>
+{% endfor %}
+
 
 {% endblock %}

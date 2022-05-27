@@ -1,9 +1,9 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .models import Store, Product, WishList
-from .forms import ProductForm, WishListForm
+from .models import Store, Product, Review, WishList
+from .forms import ProductForm, WishListForm, ReviewForm
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from django.urls import reverse, reverse_lazy
+from django.urls import reverse
 import os
 import uuid
 import boto3
@@ -20,7 +20,7 @@ def home(request):
 
 @login_required
 def stores_index(request):
-  stores = Store.objects.filter(user=request.user)
+  stores = Store.objects.all()
   return render(request, 'stores/index.html', {'stores' : stores})
 
 class StoreCreate(LoginRequiredMixin, CreateView):
@@ -100,13 +100,16 @@ class ProductDelete(LoginRequiredMixin, DeleteView):
 @login_required
 def product_detail(request, product_id):
   product = Product.objects.get(id=product_id)
+
   wishlist = WishList.objects.filter(users=request.user).exclude(products__id = product_id)
   return render(request, 'products/detail.html', {'product':product, 'wishlists':wishlist})
 
+@login_required
 def new_wishlist(request, product_id):
   form = WishListForm()
   return render(request, 'wishlists/create.html', {'form' : form, 'product_id' : product_id})
 
+@login_required
 def wishlist_create(request, product_id):
   form = WishListForm(request.POST)
   if form.is_valid():
@@ -115,6 +118,37 @@ def wishlist_create(request, product_id):
     form.save()
   return redirect('product_detail', product_id=product_id)
 
+@login_required
 def assoc_product(request, product_id):
   WishList.objects.get(id=request.POST['id']).products.add(product_id) 
   return redirect('product_detail', product_id=product_id)
+
+  reviews = Review.objects.filter(product=product_id)
+  return render(request, 'products/detail.html', {'product':product, 'reviews':reviews})
+
+@login_required
+def new_review(request, product_id):
+  form = ReviewForm()
+  return render(request, 'reviews/create.html', {'form' : form, 'product' : product_id})
+
+
+@login_required
+def review_create(request, product_id):
+  product = Product.objects.get(id=product_id)
+  form = ReviewForm(request.POST)
+  if form.is_valid():
+    new_review = form.save(commit=False)
+    new_review.product = product
+    new_review.user = request.user
+    new_review.save()
+  return redirect('product_detail', product_id = product_id)
+
+class ReviewUpdate(LoginRequiredMixin, UpdateView):
+  model = Review
+  fields = ['title', 'review', 'rating']
+
+class ReviewDelete(LoginRequiredMixin, DeleteView):
+  model = Review
+  def get_success_url(self, **kwargs):
+        return reverse('product_detail', args=(self.object.product.id,))
+
