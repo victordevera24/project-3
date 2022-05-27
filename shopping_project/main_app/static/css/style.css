@@ -35,14 +35,13 @@ main {
   flex: 1 0 auto;
 }
 
-
 footer.page-footer {
   padding-top: 0;
   text-align: right;
 }
 
 nav{
-    background-color: #87329f;
+  background-color: #87329f;
 }
 
 .page-footer{
@@ -51,15 +50,41 @@ nav{
 
 .storename{
   text-align: center;
-
 }
+
 .button{
   background-color: white; /* Green */
   border: none;
   color: red;
   padding: 15px 32px;
   text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 15px;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 15px;
+}
+
+.productdetails-image{
+  padding: 50px;
+}
+
+.productdetails1{
+  color:white; 
+  font-display: right ;
+  margin-right: 0 auto;
+}
+
+.productflex{
+  display:flex;
+  flex-wrap: column;
+  justify-content: space-evenly;
+}
+
+.postpic-productdetail{
+  object-fit: contain;
+  width: 20vw;
+  /* height: 50vh; */
+}
+
+.product-align{
+  text-align:right;
 }
