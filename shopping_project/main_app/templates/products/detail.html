@@ -13,7 +13,7 @@
     <label>Select a Wishlist</label>
     <select class="browser-default" name="id">
       {% for wishlist in wishlists %}
-      <option value="{{wishlist.id}}">{{wishlist.name}}</option>
+        <option value="{{wishlist.id}}">{{wishlist.name}}</option>
       {% endfor %}
     </select>
     <input type="submit" value="Add to Wishlist">
