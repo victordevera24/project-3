@@ -44,6 +44,7 @@ class StoreDelete(LoginRequiredMixin, DeleteView):
 def store_detail(request, store_id):
   store = Store.objects.get(id=store_id)
   products = Product.objects.filter(store=store_id)
+  
   return render(request, 'stores/detail.html',{'store' : store, 'products':products})
 
 @login_required

@@ -27,6 +27,7 @@ body {
     flex-direction: column;
     background-image: linear-gradient(to right top, #dccf88, #f0b175, #fd917b, #f97496, #d867bc, #bd64cb, #9765d9, #5e68e4, #5861e2, #5159e0, #4b52dd, #454adb);
     color: white;
+    text-align: center;
   }
   
   main {
@@ -45,4 +46,19 @@ body {
 
 .page-footer{
     background-color: #87329f;
+  }
+
+  .storename{
+    text-align: center;
+    
+  }
+  .button{
+    background-color: white; /* Green */
+    border: none;
+    color: red;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 15px;
   }
