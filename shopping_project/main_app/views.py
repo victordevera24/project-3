@@ -103,7 +103,8 @@ def product_detail(request, product_id):
   product = Product.objects.get(id=product_id)
   reviews = Review.objects.filter(product=product_id)
   wishlist = WishList.objects.filter(users=request.user).exclude(products__id = product_id)
-  return render(request, 'products/detail.html', {'product':product, 'reviews':reviews, 'wishlists':wishlist})
+  wishlists_in_use = WishList.objects.filter(users=request.user, products__id = product_id)
+  return render(request, 'products/detail.html', {'product':product, 'reviews':reviews, 'wishlists':wishlist, "usedwl":wishlists_in_use})
 
 @login_required
 def new_wishlist(request, product_id):
