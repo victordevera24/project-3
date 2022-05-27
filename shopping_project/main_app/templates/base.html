@@ -19,10 +19,10 @@
                 <ul>
                     <li><a href="{% url 'home' %}">Home</a></li>
                     {% if user.is_authenticated %}
-                        <li><a href="{% url 'stores_create' %}">Add Store</a></li>
-                        <li><a href="{% url 'stores_index' %}">Store List</a></li>
-                        <li><a href="">Wish List</a></li>
-                        <li><a href="{% url 'logout' %}">Log Out</a></li>
+                    <li><a href="{% url 'stores_create' %}">Add Store</a></li>
+                    <li><a href="{% url 'stores_index' %}">Store List</a></li>
+                    <li><a href="{% url 'wishlists_index' %}">Wish List</a></li>
+                    <li><a href="{% url 'logout' %}">Log Out</a></li>
                     {% else %}
                     <li><a href="{% url 'signup' %}">Sign Up</a></li>
                     <li><a href="{% url 'login' %}">Log In</a></li>
@@ -44,10 +44,10 @@
 <script>
     const dateEl = document.getElementById('id_sale_end');
     M.Datepicker.init(dateEl, {
-      format: 'yyyy-mm-dd',
-      defaultDate: new Date(),
-      setDefaultDate: true,
-      autoClose: true
+        format: 'yyyy-mm-dd',
+        defaultDate: new Date(),
+        setDefaultDate: true,
+        autoClose: true
     });
 </script>
 

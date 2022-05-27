@@ -103,7 +103,8 @@ def product_detail(request, product_id):
   product = Product.objects.get(id=product_id)
   reviews = Review.objects.filter(product=product_id)
   wishlist = WishList.objects.filter(users=request.user).exclude(products__id = product_id)
-  return render(request, 'products/detail.html', {'product':product, 'reviews':reviews, 'wishlists':wishlist})
+  wishlists_in_use = WishList.objects.filter(users=request.user, products__id = product_id)
+  return render(request, 'products/detail.html', {'product':product, 'reviews':reviews, 'wishlists':wishlist, "usedwl":wishlists_in_use})
 
 @login_required
 def new_wishlist(request, product_id):
@@ -140,7 +141,9 @@ def review_create(request, product_id):
     new_review.product = product
     new_review.user = request.user
     new_review.save()
-  return redirect('product_detail', product_id = product_id)
+    return redirect('product_detail', product_id = product_id)
+  else:# redirect back to the user page with errors
+    return render(request, 'reviews/create.html', {'form':form, 'product': product_id})
 
 class ReviewUpdate(LoginRequiredMixin, UpdateView):
   model = Review
@@ -151,3 +154,13 @@ class ReviewDelete(LoginRequiredMixin, DeleteView):
   def get_success_url(self, **kwargs):
         return reverse('product_detail', args=(self.object.product.id,))
 
+@login_required
+def wishlists_index(request):
+  wishlists = WishList.objects.filter(users=request.user)
+  return render(request, 'wishlists/index.html', {'wishlists' : wishlists, 'user': request.user})
+
+@login_required
+def wishlists_detail(request, wishlist_id):
+  wishlist = WishList.objects.get(id=wishlist_id)
+  products = wishlist.products.all()
+  return render(request, 'wishlists/detail.html', {'wishlist' : wishlist, 'products' : products})

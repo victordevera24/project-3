@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>{{user}}'s Wishlists</h1>
+
+{% if wishlists.count %}
+
+{% for wishlist in wishlists %}
+<ul>
+    <li><a href="/wishlists/{{wishlist.id}}/">{{ wishlist.name }}</a></li>
+</ul>
+{% endfor %}
+
+{% else %}
+<h4>You have not created any wishlists yet</h4>
+{% endif %}
+
+{% endblock %}
