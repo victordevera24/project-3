@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block content %}
 <div>
   <div class="productflex">
@@ -16,42 +17,47 @@
           <button><a class="productdetails-button" href="{% url 'products_delete' product.id  %}">Delete</a></button>
         {% endif %}
       </ul>
+      <div class="card-action">
+        {% if usedwl.count %}
+          <p>Already on your
+          {% for wl in usedwl %}
+            <span style=color:rgb(132,0,255);font-weight:bold>"{{wl.name}}"</span>
+          {% endfor %}
+          wishlist(s).
+          </p>
+        {% endif %}
+        {% if wishlists.count %}
+          <form action="{% url 'assoc_product' product.id %}" method="post">
+            {% csrf_token %}
+            <label>Select a Wishlist</label>
+            <select class="browser-default" name="id">
+            {% for wishlist in wishlists %}
+              <option value="{{wishlist.id}}">{{wishlist.name}}</option>
+            {% endfor %}
+            </select>
+            <input type="submit" value="Add to Wishlist">
+          </form>
+        {% endif %}
+        <form action="{% url 'new_wishlist' product.id %}">
+          <button type="submit">Make a new wishlist</button>
+        </form>
+      </div>
     </div>
-  </div>
-  <div class="card-action">
-    {% if usedwl.count %}
-      <p>Already on your
-      {% for wl in usedwl %}
-        <span style=color:rgb(132,0,255);font-weight:bold>"{{wl.name}}"</span>
-      {% endfor %}
-      wishlist(s).
-      </p>
-    {% endif %}
-    {% if wishlists.count %}
-      <form action="{% url 'assoc_product' product.id %}" method="post">
-        {% csrf_token %}
-        <label>Select a Wishlist</label>
-        <select class="browser-default" name="id">
-        {% for wishlist in wishlists %}
-          <option value="{{wishlist.id}}">{{wishlist.name}}</option>
-        {% endfor %}
-        </select>
-        <input type="submit" value="Add to Wishlist">
-      </form>
-    {% endif %}
-    <form action="{% url 'new_wishlist' product.id %}">
-      <button type="submit">Make a new wishlist</button>
-    </form>
   </div>
   <button><a href="{% url 'new_review' product.id %}">Add review</a></button>
   {% for review in reviews %}
-    <ul>
-      <li>{{ review.title }}</li>
-      {% if request.user == review.user %}
-        <a href="{% url 'review_update' review.id %}">Edit</a>
-        <a href="{% url 'review_delete' review.id  %}">Delete</a>
-      {% endif %}
-    </ul>
+    <div class="review-wrapper">
+      <div class="review-header">
+        <h4>{{ review.title }}</h4>
+        <img class="rating-img" src="{% static 'images/rating_' %}{{review.rating}}.jpeg">
+      </div>
+        <p>{{ review.review }}</p>
+        <p>-{{ review.user.username }}</h3>
+        {% if request.user == review.user %}
+          <a href="{% url 'review_update' review.id %}">Edit</a>
+          <a href="{% url 'review_delete' review.id  %}">Delete</a>
+        {% endif %}
+    </div>
   {% endfor %}
- </div>
+</div>
 {% endblock %}

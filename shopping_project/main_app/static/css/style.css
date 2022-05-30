@@ -50,14 +50,9 @@ nav {
 
 .storename {
   text-align: center;
-  border-radius:20px;
-  border-style:ridge;
-  background-color: white;
-  color: black;
-  padding-bottom:10px;
-  border-color: black;
-  border-width: 20px;
- 
+  border-radius:5px;
+  background-color: #87329f;
+  padding-bottom:10px; 
 }
 
 .button {
@@ -91,10 +86,26 @@ nav {
 .postpic-productdetail {
   object-fit: contain;
   width: 20vw;
-  /* height: 50vh; */
 }
 
 .product-align {
+  text-align:right;
+}
+
+.review-wrapper {
+  background-color: #87329f;
+  margin: 10px;
+}
+
+.review-header {
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
+}
+.rating-img {
+  height: 25px;
+  margin-top: 2%;
+
   text-align: right;
 }
 
