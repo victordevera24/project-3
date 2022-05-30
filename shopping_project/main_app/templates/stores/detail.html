@@ -19,17 +19,34 @@
             <li class="tab col s3"><a href="#coolitems">Cool Items</a></li>
         </ul>
     </div>
-    <div id="sales" class="col s12"></div>
-    <div id="coolitems" class="col s12">
+    <div id="sales" class="col s12">
         <div class="card horizontal">
             <div class="feedwrapper card-content">
                 {% for product in products %}
+                {% if product.on_sale == True %}
                 <div class="postwrapper">
                     <a href="/product/{{product.id}}/"><img class="postpic" src="{{product.url}}"></a>
                     <a href="/product/{{product.id}}/">
                         <h4>{{ product.name }}<span class="badge red">On Sale!</span></h4>
                     </a>
                 </div>
+                {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <div id="coolitems" class="col s12">
+        <div class="card horizontal">
+            <div class="feedwrapper card-content">
+                {% for product in products %}
+                {% if product.on_sale == False %}
+                <div class="postwrapper">
+                    <a href="/product/{{product.id}}/"><img class="postpic" src="{{product.url}}"></a>
+                    <a href="/product/{{product.id}}/">
+                        <h4>{{ product.name }}</h4>
+                    </a>
+                </div>
+                {% endif %}
                 {% endfor %}
             </div>
         </div>
