@@ -4,24 +4,37 @@
 <h1>{{store.name}}</h1>
 <div class="card-action">
     {% if request.user == store.user %}
-        <a href="{% url 'stores_update' store.id %}">Edit</a>
-        <a href="{% url 'stores_delete' store.id  %}">Delete</a>
+    <a href="{% url 'stores_update' store.id %}">Edit</a>
+    <a href="{% url 'stores_delete' store.id  %}">Delete</a>
     {% endif %}
 </div>
 
 
-<button class="button"><a href="{% url 'new_product' store.id %}">ADD PRODUCT</a></button>
+<button class="button" id="addbutton"><a href="{% url 'new_product' store.id %}">+ ADD PRODUCT</a></button>
 
-<div class="feedwrapper">
-    {% for product in products %}
-    <div class="postwrapper">
-        <a href="/product/{{product.id}}/"><img class="postpic" src="{{product.url}}"></a>
-        <a href="/product/{{product.id}}/">
-            <h4>{{ product.name }}</h4>
-        </a>
-    </div>   
-    {% endfor %}
+<div class="row">
+    <div class="col s12 tabs-top">
+        <ul class="tabs tabs-fixed-width">
+            <li class="tab col s3 active"><a href="#sales">On Sale</a></li>
+            <li class="tab col s3"><a href="#coolitems">Cool Items</a></li>
+        </ul>
+    </div>
+    <div id="sales" class="col s12"></div>
+    <div id="coolitems" class="col s12">
+        <div class="feedwrapper">
+            {% for product in products %}
+            <div class="postwrapper">
+                <a href="/product/{{product.id}}/"><img class="postpic" src="{{product.url}}"></a>
+                <a href="/product/{{product.id}}/">
+                    <h4>{{ product.name }}</h4>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
 </div>
+
+
 
 
 {% endblock %}

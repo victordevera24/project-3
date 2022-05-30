@@ -7,6 +7,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SONA</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
@@ -41,6 +43,13 @@
         <div class="right">All Rights Reserved, &copy; 2022 Vicoshalatha &nbsp;</div>
     </footer>
 </body>
+
+<script>
+    $(document).ready(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
 <script>
     const dateEl = document.getElementById('id_sale_end');
     M.Datepicker.init(dateEl, {
