@@ -2,9 +2,9 @@ from django.db import models
 from django.urls import reverse
 from datetime import date
 from django.contrib.auth.models import User
-from django.core.validators import MinValueValidator, MaxValueValidator
+from django import forms
 
-
+RATINGS = (('1', '1'),('2', '2'),('3', '3'),('4', '4'),('5', '5'))
 
 
 # Create your models here.

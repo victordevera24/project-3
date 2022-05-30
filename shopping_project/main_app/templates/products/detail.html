@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block content %}
 <div>
   <div class="productflex">
@@ -45,13 +46,18 @@
   </div>
   <button><a href="{% url 'new_review' product.id %}">Add review</a></button>
   {% for review in reviews %}
-    <ul>
-      <li>{{ review.title }}</li>
-      {% if request.user == review.user %}
-        <a href="{% url 'review_update' review.id %}">Edit</a>
-        <a href="{% url 'review_delete' review.id  %}">Delete</a>
-      {% endif %}
-    </ul>
+    <div>
+   
+        <h4>{{ review.title }}</h4>
+        <img class="responsive-img card-panel" src="{% static 'images/rating_' %}{{review.rating}}.jpeg">
+        <p>{{ review.review }}</p>
+        <h3>{{ review.user.username }}</h3>
+        {% if request.user == review.user %}
+          <a href="{% url 'review_update' review.id %}">Edit</a>
+          <a href="{% url 'review_delete' review.id  %}">Delete</a>
+        {% endif %}
+     
+    </div>
   {% endfor %}
- </div>
+</div>
 {% endblock %}
