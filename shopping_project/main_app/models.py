@@ -55,7 +55,7 @@ class WishList(models.Model):
 
 class Review(models.Model):
     title = models.CharField(max_length=100)
-    review = models.TextField(max_length=100)
+    review = models.TextField(max_length=1000)
     rating = models.IntegerField()
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
