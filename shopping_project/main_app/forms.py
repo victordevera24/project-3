@@ -5,7 +5,7 @@ from .models import Product, Review, WishList
 class ProductForm(ModelForm):
     class Meta:
         model = Product
-        fields = ['name', 'price', 'on_sale', 'sale_price', 'sale_end']
+        fields = ['name', 'price', 'sale_price', 'sale_end']
 
 
 class WishListForm(ModelForm):
