@@ -173,3 +173,4 @@ def wishlists_detail(request, wishlist_id):
 
 def test(request):
   return render (request, 'stores/test.html')
+
