@@ -55,10 +55,16 @@ def new_product(request, store_id):
 @login_required
 def product_create(request, store_id):
   form = ProductForm(request.POST)
+  if 'on_sale' in request.POST:
+    print("yippee kay ay")
   if form.is_valid():
     new_product = form.save(commit=False)
     new_product.store_id = store_id
     new_product.user_id = request.user.id
+    if 'on_sale' in request.POST:
+      new_product.on_sale = True
+    else:
+      new_product.on_sale = False
     photo_file = request.FILES.get('photo-file', None)
     if photo_file:
       s3 = boto3.client('s3')
@@ -164,4 +170,7 @@ def wishlists_detail(request, wishlist_id):
   wishlist = WishList.objects.get(id=wishlist_id)
   products = wishlist.products.all()
   return render(request, 'wishlists/detail.html', {'wishlist' : wishlist, 'products' : products})
+
+def test(request):
+  return render (request, 'stores/test.html')
 

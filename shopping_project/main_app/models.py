@@ -29,6 +29,7 @@ class Store(models.Model):
 class Product(models.Model):
     name = models.CharField(max_length=100)
     price = models.IntegerField()
+    on_sale = models.BooleanField()
     sale_price = models.IntegerField()
     sale_end = models.DateField()
     store = models.ForeignKey(Store, on_delete=models.CASCADE)

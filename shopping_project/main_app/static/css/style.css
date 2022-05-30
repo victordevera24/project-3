@@ -8,18 +8,18 @@ footer {
   flex-wrap: wrap;
   justify-content: space-between;
   gap: 20px;
+  margin-top: 20px;
   margin-bottom: 10px;
 }
 
 .postwrapper {
   width: 20vw;
-  height: 23vh;
 }
 
 .postpic {
   object-fit: contain;
   width: 20vw;
-  height: 10vh;
+  max-height: 30vh;
 }
 
 body {
@@ -40,23 +40,24 @@ footer.page-footer {
   text-align: right;
 }
 
-nav{
+nav {
   background-color: #87329f;
 }
 
-.page-footer{
+.page-footer {
   background-color: #87329f;
 }
 
-.storename{
+.storename {
   text-align: center;
   border-radius:5px;
   background-color: #87329f;
   padding-bottom:10px; 
 }
 
-.button{
-  background-color: white; /* Green */
+.button {
+  background-color: white;
+  /* Green */
   border: none;
   color: red;
   padding: 15px 32px;
@@ -66,23 +67,23 @@ nav{
   font-size: 15px;
 }
 
-.productdetails-image{
+.productdetails-image {
   padding: 50px;
 }
 
-.productdetails1{
-  color:white; 
-  font-display: right ;
+.productdetails1 {
+  color: white;
+  font-display: right;
   margin-right: 0 auto;
 }
 
-.productflex{
-  display:flex;
+.productflex {
+  display: flex;
   flex-wrap: column;
   justify-content: space-evenly;
 }
 
-.postpic-productdetail{
+.postpic-productdetail {
   object-fit: contain;
   width: 20vw;
 }
@@ -104,4 +105,35 @@ nav{
 .rating-img {
   height: 25px;
   margin-top: 2%;
+
+  text-align: right;
+}
+
+.row .col.s12 {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.tabs .tab a {
+  color: #5e68e4;
+}
+
+.tabs .indicator {
+  background-color: #454adb;
+}
+
+.tabs .tab a:focus,
+.tabs .tab a:focus.active {
+  background-color: #9765d9;
+  color: white;
+}
+
+.tabs .tab a:hover,
+.tabs .tab a.active {
+  background-color: #9765d9;
+  color: white;
+}
+
+span.badge {
+  color: white;
 }
