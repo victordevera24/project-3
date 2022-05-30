@@ -19,6 +19,7 @@ footer {
 .postpic {
   object-fit: contain;
   width: 20vw;
+  max-height: 30vh;
 }
 
 body {
@@ -111,5 +112,9 @@ nav {
 .tabs .tab a:hover,
 .tabs .tab a.active {
   background-color: #9765d9;
+  color: white;
+}
+
+span.badge {
   color: white;
 }
