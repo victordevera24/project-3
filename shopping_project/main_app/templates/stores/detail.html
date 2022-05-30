@@ -21,16 +21,19 @@
     </div>
     <div id="sales" class="col s12"></div>
     <div id="coolitems" class="col s12">
-        <div class="feedwrapper">
-            {% for product in products %}
-            <div class="postwrapper">
-                <a href="/product/{{product.id}}/"><img class="postpic" src="{{product.url}}"></a>
-                <a href="/product/{{product.id}}/">
-                    <h4>{{ product.name }}</h4>
-                </a>
+        <div class="card horizontal">
+            <div class="feedwrapper card-content">
+                {% for product in products %}
+                <div class="postwrapper">
+                    <a href="/product/{{product.id}}/"><img class="postpic" src="{{product.url}}"></a>
+                    <a href="/product/{{product.id}}/">
+                        <h4>{{ product.name }}<span class="badge red">On Sale!</span></h4>
+                    </a>
+                </div>
+                {% endfor %}
             </div>
-            {% endfor %}
         </div>
+
     </div>
 </div>
 

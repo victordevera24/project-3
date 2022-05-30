@@ -14,13 +14,11 @@ footer {
 
 .postwrapper {
   width: 20vw;
-  height: 23vh;
 }
 
 .postpic {
   object-fit: contain;
   width: 20vw;
-  height: 10vh;
 }
 
 body {
