@@ -164,3 +164,4 @@ def wishlists_detail(request, wishlist_id):
   wishlist = WishList.objects.get(id=wishlist_id)
   products = wishlist.products.all()
   return render(request, 'wishlists/detail.html', {'wishlist' : wishlist, 'products' : products})
+

@@ -24,5 +24,6 @@ urlpatterns = [
      path('review/<int:pk>/delete/', views.ReviewDelete.as_view(), name='review_delete'),
      path('wishlists/', views.wishlists_index, name="wishlists_index"),
      path('wishlists/<int:wishlist_id>/', views.wishlists_detail, name="wishlists_detail"),
+     
 ]
 
