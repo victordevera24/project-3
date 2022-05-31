@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>Create Wishlist</h1>
+<form action="{% url 'wishlist_create' product_id %}" method="POST">
+    {% csrf_token %}
+    <table>
+        {{ form.as_table }}
+    </table>
+    <input type="submit" value="Create Wishlist" class="btn">
+</form>
+{% endblock %}
