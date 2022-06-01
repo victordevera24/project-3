@@ -4,8 +4,9 @@ Does online shopping sometimes overwhelm you?  Do you sometimes find deals and i
 
 SONA is your local shopping social network.  Much like Facebook or Instagram connects you with your friends and their experiences, and much like Nextdoor connects you only to posts that affect your local community, SONA marries the two ideas and applies it to local shopping, connecting you with friends and neighbors that are finding great new products and deals exclusive to the local shoppers in your local stores.
 
-## GETTING STARTED
+## LINK TO DEPLOYED APP
 ---
+[SONA](https://sona-shopping.herokuapp.com/)
 
 ## SCREENSHOTS
 ---
