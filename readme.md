@@ -11,8 +11,8 @@ SONA is your local shopping social network.  Much like Facebook or Instagram con
 ## SCREENSHOTS
 ---
 
-<img src='SONAstoredetail.jpg'>
-<img src='SONAitemdetail.jpg'>
+![Store details](/read-me-images/SONAstoredetail.jpg)
+![Item details](/read-me-images/SONAitemdetail.jpg)
 
 ## TECHNOLOGIES USED
 
